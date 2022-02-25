@@ -1,0 +1,29 @@
+{
+  "name": "phone-book",
+  "version": "1.0.0",
+  "description": "Developed in MongoDB, Express and JavaScript.",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/juangr18/phone-book.git"
+  },
+  "author": "@Josehm1999 @juangr18 @juliaMosquera @limajilo and @JohnHuari",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/juangr18/phone-book/issues"
+  },
+  "homepage": "https://github.com/juangr18/phone-book#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
