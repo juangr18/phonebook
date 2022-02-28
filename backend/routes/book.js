@@ -1,6 +1,6 @@
 import express from "express";
 import bookController from "../controller/book.js";
-import { nameValid, contactExist, noExistContact } from "../middleware/validations.js";
+import { nameValid, contactExist, noExistContact } from "../middlewares/validations.js";
 const router = express.Router();
 
 router.post("/register", [nameValid, noExistContact], bookController.registerPhoneBook);
