@@ -1,8 +1,6 @@
 import book from "../model/book.js";
 import { isChange } from "../service/isChange.js";
 
-const LIMIT = 10;
-
 const registerPhoneBook = async (req, res) => {
   let schema = new book({
     name: req.body.name,
@@ -16,10 +14,10 @@ const registerPhoneBook = async (req, res) => {
 };
 
 const listBook = async (req, res) => {
-  let listNumbers = await book.find({ name: new RegExp(req.params["name"]) });
-  return listNumbers.length === 0
+  let books = await book.find({ name: new RegExp(req.params["name"]) });
+  return books.length === 0
     ? res.status(400).send({ message: "No search results" })
-    : res.status(200).send({ listNumbers });
+    : res.status(200).send({ books });
 };
 
 const updateBook = async (req, res) => {
