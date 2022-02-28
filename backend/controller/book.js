@@ -6,11 +6,12 @@ const registerPhoneBook = async (req, res) => {
   const isFullList = await book.count();
   if (isFullList === LIMIT)
     return res.status(400).send({ message: "The directory is filled" });
+
   if (!req.body.name)
     return res.status(400).send({ message: "Incomplete data." });
   const existPhone = await book.findOne({ name: req.body.name });
-  if (existPhone) return res.status(400).send({ message: "Already exists" });
 
+  if (existPhone) return res.status(400).send({ message: "Already exists" });
   let schema = new book({
     name: req.body.name,
     phoneNumber: req.body.phoneNumber,
@@ -29,4 +30,32 @@ const listBook = async (req, res) => {
     : res.status(200).send({ listNumbers });
 };
 
-export default { registerPhoneBook, listBook };
+const updateBook = async (req, res) => {
+  if (!req.body.name)
+    return res.status(400).send({ message: "Incomplete data." });
+  const bookEdit = await book.findByIdAndUpdate(req.body._id, {
+    name: req.body.name,
+    phoneNumber: req.body.phoneNumber,
+    cellNumber: req.body.cellNumber,
+  });
+  return bookEdit
+    ? res.status(200).send({ message: "Conctact updated." })
+    : res.status(500).send({ message: "Error updating conctact." });
+};
+
+const deleteBook = async (req, res) => {};
+
+const availableContact = async (req, res) => {
+  let contacts = await book.count();
+  return contacts === 0
+    ? res.status(400).send({ message: "No available contacts now" })
+    : res.status(200).send({ message: "Available contacts now: " + contacts });
+};
+
+export default {
+  registerPhoneBook,
+  listBook,
+  updateBook,
+  deleteBook,
+  availableContact,
+};
