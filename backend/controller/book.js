@@ -3,11 +3,6 @@ import book from "../model/book.js";
 const LIMIT = 10;
 
 const registerPhoneBook = async (req, res) => {
-  const isFullList = await book.count();
-  if (isFullList === LIMIT)
-    return res.status(400).send({ message: "The directory is filled" });
-
-  
   let schema = new book({
     name: req.body.name,
     phoneNumber: req.body.phoneNumber,

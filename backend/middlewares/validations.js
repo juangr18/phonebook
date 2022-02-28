@@ -1,5 +1,7 @@
 import book from "../model/book.js";
 
+const LIMIT = 10;
+
 const nameValid = (req, res, next) => {
   return req.body.name
     ? next()
@@ -30,4 +32,11 @@ const contactExist = async (req, res, next) => {
   }
 };
 
-export { nameValid, contactExist, noExistContact };
+const isLimit = async (req, res, next) => {
+  const isFullList = await book.count();
+  return isFullList === LIMIT
+    ? res.status(400).send({ message: "The directory is filled" })
+    : next();
+};
+
+export { nameValid, contactExist, noExistContact, isLimit };
