@@ -1,13 +1,13 @@
 import express from "express";
 import bookController from "../controller/book.js";
-
+import { nameValid } from "../middleware/validations.js";
 const router = express.Router();
 
-router.post("/register", bookController.registerPhoneBook);
+router.post("/register", [nameValid], bookController.registerPhoneBook);
 router.get("/list/:name?", bookController.listBook);
-router.put("/update", bookController.updateBook);
+router.put("/update", [nameValid], bookController.updateBook);
 router.get("/available", bookController.availableContact);
 router.get("/limit", bookController.whatLimit);
-router.delete("/delete", bookController.deleteBook);
+router.delete("/delete", [nameValid], bookController.deleteBook);
 
 export default router;

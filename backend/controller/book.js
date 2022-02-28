@@ -7,8 +7,6 @@ const registerPhoneBook = async (req, res) => {
   if (isFullList === LIMIT)
     return res.status(400).send({ message: "The directory is filled" });
 
-  if (!req.body.name)
-    return res.status(400).send({ message: "Incomplete data." });
   const existPhone = await book.findOne({ name: req.body.name });
 
   if (existPhone) return res.status(400).send({ message: "Already exists" });
@@ -31,8 +29,6 @@ const listBook = async (req, res) => {
 };
 
 const updateBook = async (req, res) => {
-  if (!req.body.name)
-    return res.status(400).send({ message: "Incomplete data." });
   const bookEdit = await book.findByIdAndUpdate(req.body._id, {
     name: req.body.name,
     phoneNumber: req.body.phoneNumber,
@@ -44,7 +40,6 @@ const updateBook = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
-  if(!req.body.name) return res.status(400).send({message:"Incomplete data"});
   const existContact = await book.findOne({name:req.body.name});
   if (!existContact)
     return res.status(400).send({ message: "Contact does not exist." });
