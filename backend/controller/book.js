@@ -43,7 +43,16 @@ const updateBook = async (req, res) => {
     : res.status(500).send({ message: "Error updating conctact." });
 };
 
-const deleteBook = async (req, res) => {};
+const deleteBook = async (req, res) => {
+  if(!req.body.name) return res.status(400).send({message:"Incomplete data"});
+  const existContact = await book.findOne({name:req.body.name});
+  if (!existContact)
+    return res.status(400).send({ message: "Contact does not exist." });
+  const bookDelete = await book.findByIdAndDelete(existContact._id);
+  return bookDelete
+    ? res.status(200).send({ message: "Contact deleted." })
+    : res.status(500).send({ message: "Error while deleting a contact." });
+};
 
 const availableContact = async (req, res) => {
   let contacts = await book.count();

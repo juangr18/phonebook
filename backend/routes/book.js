@@ -8,5 +8,6 @@ router.get("/list/:name?", bookController.listBook);
 router.put("/update", bookController.updateBook);
 router.get("/available", bookController.availableContact);
 router.get("/limit", bookController.whatLimit);
+router.delete("/delete", bookController.deleteBook);
 
 export default router;
