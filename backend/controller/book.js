@@ -40,10 +40,7 @@ const updateBook = async (req, res) => {
 };
 
 const deleteBook = async (req, res) => {
-  const existContact = await book.findOne({name:req.body.name});
-  if (!existContact)
-    return res.status(400).send({ message: "Contact does not exist." });
-  const bookDelete = await book.findByIdAndDelete(existContact._id);
+  const bookDelete = await book.findByIdAndDelete(req.body._id);
   return bookDelete
     ? res.status(200).send({ message: "Contact deleted." })
     : res.status(500).send({ message: "Error while deleting a contact." });
