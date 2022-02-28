@@ -52,10 +52,21 @@ const availableContact = async (req, res) => {
     : res.status(200).send({ message: "Available contacts now: " + contacts });
 };
 
+const whatLimit = async (req, res) => {
+  let isFilled = await book.count();
+  isFilled = LIMIT - isFilled;
+  return isFilled === 0
+    ? res.status(400).send({ message: "The directory is filled" })
+    : res.status(200).send({
+        message: `Directory limit is: ${isFilled}`,
+      });
+};
+
 export default {
   registerPhoneBook,
   listBook,
   updateBook,
   deleteBook,
   availableContact,
+  whatLimit,
 };
