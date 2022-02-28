@@ -7,9 +7,7 @@ const registerPhoneBook = async (req, res) => {
   if (isFullList === LIMIT)
     return res.status(400).send({ message: "The directory is filled" });
 
-  const existPhone = await book.findOne({ name: req.body.name });
-
-  if (existPhone) return res.status(400).send({ message: "Already exists" });
+  
   let schema = new book({
     name: req.body.name,
     phoneNumber: req.body.phoneNumber,
