@@ -1,6 +1,6 @@
 import book from "../model/book.js";
 import { isChange } from "../service/isChange.js";
-
+const LIMIT = 10;
 const registerPhoneBook = async (req, res) => {
   let schema = new book({
     name: req.body.name,
