@@ -24,14 +24,12 @@ const listBook = async (req, res) => {
 
 const updateBook = async (req, res) => {
   let hasChange = await isChange(req.body);
-  console.log(req.body);
   if (!hasChange)
     return res.status(400).send({ message: "No change in the contact." });
   const bookEdit = await book.findByIdAndUpdate(req.body._id, {
     phoneNumber: req.body.phoneNumber,
     cellNumber: req.body.cellNumber,
   });
-  console.log(bookEdit);
   return bookEdit
     ? res.status(200).send({ message: "Conctact updated." })
     : res.status(500).send({ message: "Error updating conctact." });
