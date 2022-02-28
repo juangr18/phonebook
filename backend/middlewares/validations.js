@@ -25,7 +25,7 @@ const noExistContact = async (req, res, next) => {
 const contactExist = async (req, res, next) => {
   const existContact = await book.findOne({ name: req.body.name });
   if (existContact) {
-    req.body = existContact;
+    req.body._id = existContact._id;
     next();
   } else {
     res.status(400).send({ message: "Contact does not exist." });
