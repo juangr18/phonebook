@@ -130,11 +130,10 @@ const filterName = async (api, name) => {
   return await fetch(api + "/" + name)
     .then((res) => res.json())
     .then((json) => printData(json.books))
-    .catch((error) => console.error("Error: ", error.message));
+    .catch((e) => console.log(e));
 };
 
 btnSearch.onclick = () => {
   let name = document.getElementById("search").value;
-  console.log(name);
   filterName(URL_API_LIST, name);
 };
